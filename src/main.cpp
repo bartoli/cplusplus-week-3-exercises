@@ -61,7 +61,7 @@ void TransactionData::add_input(const std::string& tx_id,
 
 void TransactionData::add_output(uint64_t value_satoshi,
                                  const std::string& script_pubkey) {
-    // TODO: append {value_satoshi, script_pubkey} to `outputs`.
+    // TODO: append value_satoshi and script_pubkey to `outputs`.
     (void)value_satoshi;
     (void)script_pubkey;
 }
@@ -96,7 +96,7 @@ std::string TransactionData::get_metadata_value(
 
 std::tuple<uint32_t, std::size_t, std::size_t, uint32_t>
 TransactionData::get_transaction_header() const {
-    // TODO: return {version, inputs.size(), outputs.size(), lock_time}.
+    // TODO: return the version, inputs.size(), outputs.size(), and lock_time.
     return {0, 0, 0, 0};
 }
 
@@ -126,8 +126,7 @@ void UTXOSet::add_utxo(const std::string& tx_id,
 bool UTXOSet::remove_utxo(const std::string& tx_id,
                           uint32_t vout_index,
                           uint64_t amount) {
-    // TODO: remove the matching UTXO from `utxos`. Return true if it was
-    //       present, false otherwise.
+    // TODO: remove the matching UTXO from `utxos`. Return true if it was present, false otherwise.
     (void)tx_id;
     (void)vout_index;
     (void)amount;
@@ -160,15 +159,15 @@ bool UTXOSet::is_subset_of(const UTXOSet& other) const {
 }
 
 UTXOSet UTXOSet::combine_utxos(const UTXOSet& other) const {
-    // TODO: return a new UTXOSet whose `utxos` is the union of this set's
-    //       UTXOs and `other.utxos`. Hint: std::set_union.
+    // TODO: return a new UTXOSet whose `utxos` is the union of this set's UTXOs and `other.utxos`.
+    //       Hint: std::set_union.
     (void)other;
     return {};
 }
 
 UTXOSet UTXOSet::find_common_utxos(const UTXOSet& other) const {
-    // TODO: return a new UTXOSet whose `utxos` is the intersection of this
-    //       set's UTXOs and `other.utxos`. Hint: std::set_intersection.
+    // TODO: return a new UTXOSet whose `utxos` is the intersection of this set's UTXOs and `other.utxos`. 
+    //       Hint: std::set_intersection.
     (void)other;
     return {};
 }
@@ -183,8 +182,7 @@ void generate_block_headers(
     uint32_t start_nonce,
     uint32_t max_attempts,
     const std::function<bool(const BlockHeader&)>& on_header) {
-    // TODO: starting from `start_nonce`, build a BlockHeader for each nonce
-    //       and call on_header(header). Stop early if on_header returns false.
+    // TODO: starting from `start_nonce`, build a BlockHeader for each nonce and call on_header(header). Stop early if on_header returns false.
     //       Otherwise stop after `max_attempts` attempts.
     (void)prev_block_hash;
     (void)merkle_root;
