@@ -1,0 +1,33 @@
+name: C++ Unit Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - name: Show toolchain versions
+      run: |
+        cmake --version
+        c++ --version
+
+    - name: Configure
+      run: cmake -S . -B build
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Run unit tests
+      run: ctest --test-dir build --output-on-failure
+
+    - name: Check result
+      if: ${{ failure() }}
+      run: echo "Some tests failed. Review the output above."
