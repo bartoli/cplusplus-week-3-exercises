@@ -25,13 +25,37 @@ bool UTXO::operator==(const UTXO& other) const {
 // ---- Exercises --------------------------------------------------------------
 
 std::vector<uint8_t> CompactSizeEncoder::encode(uint64_t value) {
+    std::vector<uint8_t> out;
+    if(value<0xFD)
+    {
+        out.push_back(value & 0xFF);
+        return out;
+    }
+    if(value<=0xFFFF)
+    {
+        out.push_back(0xFD);
+        out.push_back((value>>8)&0xFF);
+        out.push_back(value&0xFF)
+        return out;
+    }
+    if(value<=0xFFFFFFFF)
+    {
+        out.push_back(0xFE);
+        out.push_back((value>>24)&0xFF);
+        out.push_back((value>>16)&0xFF);
+        out.push_back((value>>8)&0xFF);
+        out.push_back(value&0xFF)
+        return out;
+    }
+    out.push_back(0xFF);
+    return;
+            
     // TODO: encode `value` into Bitcoin CompactSize bytes.
     //   value < 0xFD          -> single byte
     //   value <= 0xFFFF       -> 0xFD prefix + 2 little-endian bytes
     //   value <= 0xFFFFFFFF   -> 0xFE prefix + 4 little-endian bytes
     //   otherwise             -> 0xFF prefix + 8 little-endian bytes
-    (void)value;
-    return {};
+    
 }
 
 std::optional<std::pair<uint64_t, std::size_t>> CompactSizeDecoder::decode(
